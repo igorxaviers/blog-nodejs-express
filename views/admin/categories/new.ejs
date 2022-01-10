@@ -1,0 +1,15 @@
+<%- include('../../partials/header.ejs')  %> 
+<%- include('../../partials/navbar.ejs')  %> 
+<div class="container my-5">
+    <h1 class="mb-5">Nova categoria</h1>
+    <form action="/categories/save" method="post">
+        <label for="title">Título</label>
+        <input type="text" name="title" id="title" class="form-control">
+
+        <div class="d-flex justify-content-end mt-4">
+            <button class="btn btn-success">Cadastrar</button>
+        </div>
+        
+    </form>
+</div>
+<%- include('../../partials/footer.ejs')  %> 

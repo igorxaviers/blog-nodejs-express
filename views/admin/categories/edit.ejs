@@ -1,0 +1,29 @@
+<%- include('../../partials/header.ejs')  %> 
+<%- include('../../partials/navbar.ejs')  %> 
+<div class="container my-5">
+    <h1 class="mb-5">Editar categoria</h1>
+    <form action="/categories/update" method="post">
+        <label for="title">Título</label>
+        
+        <input 
+            type="hidden" 
+            name="id"
+            value="<%= category.id %>">
+
+        <input 
+            type="text" 
+            name="title" 
+            id="title" 
+            class="form-control"
+            value="<%= category.title %>">
+
+        <div class="d-flex justify-content-end mt-4">
+            <button class="btn btn-success">
+                <i class="fa-solid fa-check me-2"></i>
+                Salvar mudanças
+            </button>
+        </div>
+        
+    </form>
+</div>
+<%- include('../../partials/footer.ejs')  %> 
