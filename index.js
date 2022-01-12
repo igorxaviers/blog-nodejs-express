@@ -16,7 +16,7 @@ app.use(session({
 }));
 
 //definicão de porta
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 //importação de controllers
 const CategoriesController = require('./categories/CategoriesController');
