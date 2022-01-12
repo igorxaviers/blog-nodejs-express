@@ -1,0 +1,39 @@
+<%- include('../../partials/header.ejs')  %> 
+<%- include('../../partials/navbar.ejs')  %> 
+<div class="col-6 mx-auto my-5">
+    <h1 class="mb-5">Novo usuário</h1>
+
+    <form action="/users/save" method="post">
+        <label for="email">Email</label>
+        <input 
+            type="email"
+            name="email"
+            id="email"
+            class="form-control mb-3"
+            placeholder="Email do usuário">
+
+        <label for="name">Nome</label>
+        <input
+            type="text"
+            name="name"
+            id="name"
+            class="form-control mb-3"
+            placeholder="Seu nome">
+
+        <label for="password">Senha</label>
+        <input 
+            type="password"
+            name="password"
+            id="password"
+            class="form-control mb-3"
+            placeholder="•••••••••">
+
+
+        <div class="d-flex justify-content-end mt-4">
+            <button class="btn btn-lg btn-success">Cadastrar</button>
+        </div>
+    </form>
+
+</div>
+
+<%- include('../../partials/footer.ejs')  %> 

@@ -45,7 +45,6 @@ body{
 .banner img{
     position: absolute;
     object-fit: cover;
-    inset: 0;
     filter: blur(5px);
     transform: scale(1.05);
 }
@@ -60,12 +59,12 @@ body{
     padding: 20px;
     color: #fff;
     flex: 31%;
+    max-width: 31%;
     box-shadow: 0 1px 10px 1px #1a1a1a;
     transition: 200ms;
 }
 .article:hover{
-    transform: scale(1.03) translateY(-5px);
-    box-shadow: 0 20px 30px 1px #1a1a1a;
+    transform: scale(1.02) translateY(-5px);
 }
 .article p{
     color: var(--primary);

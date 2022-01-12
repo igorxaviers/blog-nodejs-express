@@ -2,7 +2,18 @@
 const express = require('express');
 const bodyparser = require('body-parser');
 const connection = require('./database/database');
+const session = require('express-session');
+
 const app = express();
+
+//congiduração do express-session
+app.use(session({
+    secret: 'tubarão albino',
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24 * 2 //2 dias
+        // maxAge: 30000 //30 segundos
+    }
+}));
 
 //definicão de porta
 const PORT = process.env.PORT || 5000;
@@ -10,11 +21,11 @@ const PORT = process.env.PORT || 5000;
 //importação de controllers
 const CategoriesController = require('./categories/CategoriesController');
 const ArticlesController = require('./articles/ArticlesController');
+const UsersController = require('./users/UsersController');
 
 //importação das models
 const Category = require('./categories/Category');
 const Article = require('./articles/Article');
-const { redirect } = require('express/lib/response');
 
 //configurando body-parser
 app.use(bodyparser.json());
@@ -25,7 +36,6 @@ app.set('view engine', 'ejs');
 
 //configurando pasta public
 app.use(express.static('public'));
-
 
 //conexão com banco
 connection
@@ -38,12 +48,14 @@ connection
 //integrando dos controllers com o express
 app.use('/', CategoriesController);
 app.use('/', ArticlesController);
+app.use('/', UsersController);
 
 //rota home
 app.get('/', (req, res) => {
     Article.findAll({ 
         include: Category,
-        order: [['id','DESC']]
+        order: [['id','DESC']],
+        limit: 8
     })
     .then(articles => {
         Category.findAll()
@@ -77,6 +89,7 @@ app.get('/:slug', (req, res) => {
     .catch(err => res.redirect('/'));
 });
 
+//rota de artigos por categoria
 app.get('/category/:slug', (req, res) => {
     let slug = req.params.slug;
     Category.findOne({

@@ -3,10 +3,14 @@ const router = express.Router();
 const slugify = require('slugify');
 const Article = require('./Article');
 const Category = require('../categories/Category');
+const adminAuth = require('../middlewares/adminAuth');
 
 //listar artigos
-router.get('/admin/articles', (req, res) => {
-    Article.findAll({ include: [{model: Category}] })
+router.get('/admin/articles', adminAuth, (req, res) => {
+    Article.findAll({ 
+        include: [{model: Category}],
+        order: [['id', 'DESC']]
+    })
     .then(articles => {
         console.log(articles);
         res.render('admin/articles/index', { articles });
@@ -15,7 +19,7 @@ router.get('/admin/articles', (req, res) => {
 });
 
 //view de cadastro de artigo
-router.get('/admin/articles/new', (req, res) => {
+router.get('/admin/articles/new', adminAuth, (req, res) => {
     Category.findAll()
     .then(categories => {
         res.render('admin/articles/new', {categories});
@@ -24,7 +28,7 @@ router.get('/admin/articles/new', (req, res) => {
 });
 
 //criar artigo
-router.post('/articles/save', (req, res) => {
+router.post('/articles/save', adminAuth, (req, res) => {
     let title = req.body.title;
     let body = req.body.body;
     let categoryId = req.body.categoryId;
@@ -44,7 +48,7 @@ router.post('/articles/save', (req, res) => {
 });
 
 //deletar artigo
-router.post('/articles/delete', (req, res) => {
+router.post('/articles/delete', adminAuth, (req, res) => {
     let id = req.body.id;
     if(id != undefined) {
         if(!isNaN(id)) {
@@ -63,7 +67,7 @@ router.post('/articles/delete', (req, res) => {
 });
 
 //buscar dados para edição da artigo
-router.get('/admin/articles/edit/:id', (req, res) => {
+router.get('/admin/articles/edit/:id', adminAuth, (req, res) => {
     let id = req.params.id;
     Article.findByPk(id)
     .then(article => {
@@ -82,7 +86,7 @@ router.get('/admin/articles/edit/:id', (req, res) => {
 });
 
 //atualizar artigo
-router.post('/articles/update', (req, res) => {
+router.post('/articles/update', adminAuth, (req, res) => {
     let id = req.body.id;
     let title = req.body.title;
     let body = req.body.body;
@@ -107,18 +111,23 @@ router.post('/articles/update', (req, res) => {
 
 //paginação
 router.get('/articles/page/:page', (req, res) => {
-    let page = req.params.page;
+    let page = parseInt(req.params.page);
     let offset = 0;
-    let limit = 4;
+    let limit = 8;
 
     if(isNaN(page) || page == 1) {
         offset = 0;
     }
     else {
-        offset = parseInt(page) * limit;
+        offset = (page - 1) * limit;
     }
 
-    Article.findAndCountAll({ limit, offset })
+    Article.findAndCountAll({ 
+        limit,
+        offset,
+        include: Category,
+        order: [['id', 'DESC']]
+    })
     .then(articles => {
         //next: se existir mais páginas
         let next = false;
@@ -128,12 +137,18 @@ router.get('/articles/page/:page', (req, res) => {
         else {
             next = true;
         }
-
-        let result = { offset, limit, articles, next};
-        res.json(result);
+        let result = { 
+            articles,
+            next,
+            page
+        };
+        Category.findAll()
+        .then(categories => {
+            res.render('admin/articles/page', { result, categories });
+        })
+        .catch(err => console.log(err));
     })
     .catch(err => console.log(err));
-
 });
 
 module.exports = router;

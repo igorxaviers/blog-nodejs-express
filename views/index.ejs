@@ -3,7 +3,7 @@
 <div class="banner">
     <h1>DevBlog</h1>
     <h2>A place to share your knowledge</h2>
-    <img src="/img/banner.png" alt="">
+    <img src="/img/banner2.0.png" alt="">
 </div>
 <div class="container ">
     <div class="row position-relative">
@@ -11,13 +11,27 @@
             <a href="/<%= article.slug %> " class="article">
                 <div class="d-flex justify-content-between">
                     <p><%= article.category.title %> </p>
-                    <!-- <p><%= article.createdAt %> </p> -->
+                    <p>
+                        <% 
+                            var date = new Date(article.createdAt);
+                            var options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+                            var dateString = date.toLocaleDateString('pt-BR', options);
+                        %>
+                        <%= dateString %> 
+                    </p>
                 </div>
                 <h3><%= article.title %> </h3>
+                <!-- <p><%- article.body %> </p> -->
             </a>
         <% }) %>
     </div>
-    <img class="hand-background" src="/img/hand.png" alt="">
+    <div class="py-5">
+        <a href="/articles/page/2" class="btn btn-light float-end">
+            Próximo
+            <i class="fa-solid fa-chevron-right ms-2"></i>
+        </a>
+    </div>
+    <!-- <img class="hand-background" src="/img/hand.png" alt=""> -->
 </div>
 
 
