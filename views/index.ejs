@@ -1,3 +1,24 @@
 <%- include('partials/header.ejs')  %> 
-<h1>blog do xav</h1>
+<%- include('partials/navbar-home.ejs')  %> 
+<div class="banner">
+    <h1>DevBlog</h1>
+    <h2>A place to share your knowledge</h2>
+    <img src="/img/banner.png" alt="">
+</div>
+<div class="container ">
+    <div class="row position-relative">
+        <% articles.forEach(article => { %>
+            <a href="/<%= article.slug %> " class="article">
+                <div class="d-flex justify-content-between">
+                    <p><%= article.category.title %> </p>
+                    <!-- <p><%= article.createdAt %> </p> -->
+                </div>
+                <h3><%= article.title %> </h3>
+            </a>
+        <% }) %>
+    </div>
+    <img class="hand-background" src="/img/hand.png" alt="">
+</div>
+
+
 <%- include('partials/footer.ejs')  %> 

@@ -1,0 +1,51 @@
+<%- include('../../partials/header.ejs')  %> 
+<%- include('../../partials/navbar.ejs')  %> 
+<div class="col-6 mx-auto my-5">
+    <h1 class="mb-5">Novo artigo</h1>
+    <form action="/articles/save" method="post">
+
+        <label for="title">Título</label>
+        <input 
+            type="text" 
+            name="title" 
+            id="title" 
+            class="form-control mb-3">
+
+        <label for="title">Texto</label>
+        <textarea 
+            name="body" 
+            id="body" 
+            class="form-control mb-3">
+        </textarea>
+
+        <label for="category" class="mt-3">Categoria</label>
+        <select 
+            name="categoryId" 
+            class="form-control" 
+            id="category">
+            <option value="" disabled selected> - Selecione uma opção - </option>
+            <% categories.forEach(catgory => { %> 
+                <option value="<%= catgory.id %>"><%= catgory.title %></option>
+            <% }); %> 
+        </select>
+
+        <div class="d-flex justify-content-end mt-4">
+            <button class="btn btn-lg btn-success px-5">Cadastrar</button>
+        </div>
+
+
+        
+    </form>
+</div>
+<script src="/tinymce/js/tinymce/tinymce.min.js"></script>
+<script>
+    tinymce.init({
+        language: 'pt_BR',
+        selector: '#body',
+        plugins: ['advlist autolink link image lists print preview hr searchreplace wordcount fullscreen insertdatetime media table contextmenu save emoticons paste'],
+        height: 300,
+        max_height: 500,
+        toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons | save',
+    })
+</script>
+<%- include('../../partials/footer.ejs')  %> 

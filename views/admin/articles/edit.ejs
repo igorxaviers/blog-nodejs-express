@@ -1,0 +1,58 @@
+<%- include('../../partials/header.ejs')  %> 
+<%- include('../../partials/navbar.ejs')  %> 
+<div class="col-6 mx-auto my-5">
+    <h1 class="mb-5">Editar artigo</h1>
+    <form action="/articles/update" method="post">
+
+        <label for="title">Título</label>
+        <input 
+            type="hidden" 
+            name="id"
+            value="<%= article.id %>">
+        <input 
+            type="text" 
+            name="title" 
+            id="title" 
+            class="form-control mb-3"
+            value="<%= article.title %>">
+
+        <label for="title">Texto</label>
+        <textarea 
+            name="body" 
+            id="body" 
+            class="form-control mb-3">
+            <%= article.body %>
+        </textarea>
+
+        <label for="category" class="mt-3">Categoria</label>
+        <select 
+            name="categoryId" 
+            class="form-control" 
+            id="category">
+            <% categories.forEach(category => {  
+                if(category.id == article.categoryId) { %> 
+                    <option value="<%= category.id %>" selected><%= category.title %></option>
+                <% } else { %>
+                    <option value="<%= category.id %>"><%= category.title %></option>
+                <% } %>
+            <% }); %> 
+        </select>
+
+        <div class="d-flex justify-content-end mt-4">
+            <button class="btn btn-lg btn-success px-5">Salvar</button>
+        </div>
+        
+    </form>
+</div>
+<script src="/tinymce/js/tinymce/tinymce.min.js"></script>
+<script>
+    tinymce.init({
+        language: 'pt_BR',
+        selector: '#body',
+        plugins: ['advlist autolink link image lists print preview hr searchreplace wordcount fullscreen insertdatetime media table contextmenu save emoticons paste'],
+        height: 300,
+        max_height: 500,
+        toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons | save',
+    })
+</script>
+<%- include('../../partials/footer.ejs')  %> 

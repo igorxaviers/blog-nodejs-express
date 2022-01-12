@@ -4,9 +4,19 @@ const Category = require('./Category');
 const slugify = require('slugify');
 
 
-//tela de cadastro de categoria
+//view de cadastro de categoria
 router.get('/admin/categories/new', (req, res) => {
     res.render('admin/categories/new');
+});
+
+//listar categorias
+router.get('/admin/categories', (req, res) => {
+    Category.findAll()
+    .then(categories => {
+        res.render('admin/categories/index', {
+            categories
+        });
+    });
 });
 
 //criar categoria
@@ -25,16 +35,6 @@ router.post('/categories/save', (req, res) => {
     else {
         res.redirect('/admin/categories/new');
     }
-});
-
-//listar categorias
-router.get('/admin/categories', (req, res) => {
-    Category.findAll()
-    .then(categories => {
-        res.render('admin/categories/index', {
-            categories
-        });
-    });
 });
 
 //deletar categoria
