@@ -3,14 +3,28 @@
 <div class="col-5 mx-auto">
     <div class="article-details">
         <div class="article-header">
-            <h1><%= article.title %> </h1>
             <div class="d-flex justify-content-center">
-                <p class="me-5"><%= article.category.title %> </p>
-                <p><%= article.createdAt %> </p>
+                <p class="tag tag-primary"><%= article.category.title %> </p>
             </div>
+            <h1><%= article.title %> </h1>
+            <p class="text-center fs-5 mb-5"><%- article.subtitle %> </p>
+            <div class="d-flex justify-content-center">
+                <p class="tag tag-secondary">
+                    <% 
+                        var date = new Date(article.createdAt);
+                        var options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+                        var dateString = date.toLocaleDateString('pt-BR', options);
+                    %>
+                    <%= dateString %>     
+                </p>
+                <p class="tag tag-secondary"><%= (article.body.split('').length / 200).toPrecision(1) %> minutos </p>
+            </div>
+
+
+
         </div>
 
-        <div class="article-body">
+        <div class="article-body pb-5">
             <p><%- article.body %> </p>
         </div>
 

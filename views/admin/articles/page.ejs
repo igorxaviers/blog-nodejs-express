@@ -7,34 +7,44 @@
         <% result.articles.rows.forEach(article => { %>
             <a href="/<%= article.slug %> " class="article">
                 <div class="d-flex justify-content-between">
-                    <p><%= article.category.title %> </p>
-                    <!-- <p><%= article.createdAt %> </p> -->
+                    <p class="tag tag-primary"><%= article.category.title %> </p>
                 </div>
                 <h3><%= article.title %> </h3>
+                <p class="subtitle"><%- article.subtitle %> </p>
+                <div class="d-flex">
+                    <p class="tag tag-secondary">
+                        <% 
+                            var date = new Date(article.createdAt);
+                            var options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+                            var dateString = date.toLocaleDateString('pt-BR', options);
+                        %>
+                        <%= dateString %> 
+                    </p>
+                    <p class="tag tag-secondary"><%= (article.body.split('').length / 200).toPrecision(1) %> minutos </p>
+                </div>
             </a>
         <% }) %>
     </div>
 
     <div class="my-5 pb-5">
         <% if(result.page > 2) { %> 
-            <a href="/articles/page/<%= result.page - 1 %>" class="btn btn-light float-start">
+            <a href="/articles/page/<%= result.page - 1 %>" class="btn btn-lg btn-light float-start bg-green fw-bold">
                 <i class="fa-solid fa-chevron-left"></i>
-                Anterior
+                anterior
             </a>
         <% } else if(result.page == 2) {%>
-            <a href="/" class="btn btn-light float-start">
-                <i class="fa-solid fa-chevron-left"></i>
-                Anterior
+            <a href="/" class="btn btn-lg btn-light float-start bg-green fw-bold">
+                <i class="fa-solid fa-chevron-left fw-bold me-2"></i>
+                anterior
             </a>
         <% } %>
         <% if(result.next) { %> 
-            <a href="/articles/page/<%= result.page + 1 %> " class="btn btn-light float-end">
-                Próximo
+            <a href="/articles/page/<%= result.page + 1 %> " class="btn btn-lg btn-light float-end bg-green fw-bold">
+                próximo
                 <i class="fa-solid fa-chevron-right"></i>
             </a>
         <% } %>
     </div>
-    <img class="hand-background" src="/img/hand.png" alt="">
 </div>
 
 

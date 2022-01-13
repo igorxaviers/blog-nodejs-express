@@ -2,19 +2,17 @@
 <%- include('partials/navbar-home.ejs')  %> 
 
 
-<div class="container ">
+<div class="container">
 
     <div class="banner">
-        <h1 class="fw-bold">Dicas, notícias, atualizações</h1>
-        <p>Veja as últimas notícias do mundo do <strong>desenvolvimento web</strong> </p>
+        <h1 class="mt-4">Artigos de: <strong><%= category.title %> </strong></h1>
     </div>
 
-    <div class="d-flex articles flex-wrap position-relative">
+
+    <div class="d-flex articles flex-wrap position-relative mb-5 pb-5">
         <% articles.forEach(article => { %>
             <a href="/<%= article.slug %> " class="article">
-                <div class="d-flex justify-content-between">
-                    <p class="tag tag-primary"><%= article.category.title %> </p>
-                </div>
+
                 <h3><%= article.title %> </h3>
                 <p class="subtitle"><%- article.subtitle %> </p>
                 <div class="d-flex">
@@ -31,14 +29,7 @@
             </a>
         <% }) %>
     </div>
-    <% if(articles.length >= 8) { %> 
-    <div class="py-5 mb-5">
-        <a href="/articles/page/2" class="btn btn-lg btn-light float-end bg-green fw-bold">
-            próximo
-            <i class="fa-solid fa-chevron-right ms-2"></i>
-        </a>
-    </div>
-    <% } %> 
+
 </div>
 
 

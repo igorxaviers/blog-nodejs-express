@@ -1,8 +1,8 @@
 <link rel="stylesheet" href="/css/styles.css">
 
-<nav class="navbar navbar-expand-lg navbar-light text-white bg-dark">
+<nav class="navbar navbar-expand-lg navbar-light text-white bg-light">
     <div class="container">
-        <a href="/" class="navbar-brand fw-bold fs-1">
+        <a href="/" class="navbar-brand fw-bold fs-1 nav-link">
             DEV<span class="fw-light">blog</span>  
         </a>
 
@@ -13,7 +13,7 @@
 
             <% categories.forEach(category => { %>
                 <li class="nav-item">
-                    <a href="/category/<%= category.slug %>" class="nav-link">
+                    <a href="/category/<%= category.slug %>" class="nav-link fw-bold">
                         <%= category.title %>
                     </a>
                 </li>

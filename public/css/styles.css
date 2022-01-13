@@ -1,12 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800;900&display=swap');
 *{
     font-family: 'Manrope', sans-serif !important;
 }
+i{
+    font-family: "Font Awesome 6 Free" !important;
+}
+
 a{
     text-decoration: none !important;
 }
-a:hover{
-    color: #fff !important;
+
+.navbar{
+    background-color: #f1f1f1 !important;
 }
 
 :root{
@@ -17,70 +22,132 @@ a:hover{
 }
 
 body{
-    background-color: var(--dark-secondary);
+    /* background-color: var(--dark-secondary); */
 }
 
 .navbar .navbar-nav .nav-item a, .navbar-brand{
-    color: var(--primary) !important;
+    color: #333 !important;
 }
 
-.banner{
-    text-align: center;
-    overflow: hidden;
+.nav-link{
     position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--dark-primary);
-    padding: 50px 0;
-    color: #fff;
-    height: 350px;
-    margin-bottom: 50px;
+    z-index: 102;
 }
-.banner h1, h2{
-    z-index: 1;
+.nav-link::after{
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    height: 12px;
+    z-index: -1;
+    background-color: var(--primary);
+    width: 80%;
+    border-radius: 2px;
+    transition: 200ms;
+}
+.nav-link:hover::after {
+    height: 32px;
+    left: 0px;
+    bottom: 4px;
+    width: 100%;
+    border-radius: 6px;
+}
+
+
+.banner {
+    max-width: 100%;
+    height: 200px;
+    margin: 50px auto;
+    border-radius: 20px;
+    padding: 30px;
+    background-color: var(--primary);
+}
+.banner h1, .banner p{
     width: 100%;
 }
-.banner img{
-    position: absolute;
-    object-fit: cover;
-    filter: blur(5px);
-    transform: scale(1.05);
+.banner h1{
+    margin-top: 20px;
+    font-size: 48px;
 }
 
-.row{
+.articles{
     gap: 20px;
 }
 
-.article{
-    background-color: var(--dark-primary);
+.article:first-child{
+    border: 1px solid #ddd;
+    background-color: #fff;
     border-radius: 10px;
     padding: 20px;
-    color: #fff;
-    flex: 31%;
-    max-width: 31%;
-    box-shadow: 0 1px 10px 1px #1a1a1a;
+    color: #2a2a2a;
+    flex: 60%;
+    max-width: 66%;
     transition: 200ms;
 }
-.article:hover{
-    transform: scale(1.02) translateY(-5px);
+.article:first-child h3{
+    font-size: 36px;
+    line-height: 46px;
 }
-.article p{
-    color: var(--primary);
-    font-weight: 700;
+.article:first-child .subtitle{
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 26px;
+    color: #444;
+}
+.article{
+    border: 1px solid #ddd;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    color: #2a2a2a;
+    flex: 33%;
+    max-width: 32.3%;
+    transition: 200ms;
+}
+
+.article:hover{
+    transform: scale(1.02);
+    background-color: #fff;
+    border: 1px solid #f1f1f1;
+
+}
+.tag{
+    font-size: 14px;
+    font-weight: 800;
     margin-bottom: 30px;
-    background: #1a1a1a;
     width: fit-content;
-    padding: 8px 17px;
-    border-radius: 7px;
-    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.bg-green{
+    background-color: var(--primary);
+}
+
+.tag-primary{
+    font-size: 14px;
+    background: var(--primary);
+}
+.tag-secondary{
+    /* background: var(--secondary); */
+    margin-right: 10px;
+    border: 1px solid #ddd;
 }
 .article h3{
-    font-weight: 300;
-    font-size: 24px;
-    line-height: 36px;
+    font-weight: 900;
+    font-size: 26px;
+    line-height: 33px;
+    margin-bottom: 24px;
+    color: #333 !important;
 }
+.article .subtitle{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color: #444;
+}
+
 .hand-background{
     position: fixed;
     width: 350px;
@@ -95,19 +162,14 @@ body{
     text-align: center;
     font-weight: 800;
     font-size: 46px;
-    margin-bottom: 50px;
-    color: #fff;
+    margin-bottom: 20px;
+    color: #333;
 }
 .article-details .article-header{
     margin-bottom: 80px;
 }
-.article-details .article-header p{
-    color: var(--primary);
-    background-color: var(--dark-primary);
-    padding: 10px 20px;
-    border-radius: 10px;
-}
+
 .article-details .article-body{
-    color: #fff;
+    color: #444;
     line-height: 30px;
 }

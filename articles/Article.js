@@ -11,6 +11,10 @@ const Article = connection.define('articles', {
         type: sequelize.STRING,
         allowNull: false,
     },
+    subtitle: {
+        type: sequelize.STRING,
+        allowNull: true,
+    },
     body: {
         type: sequelize.TEXT,
         allowNull: false,
@@ -18,7 +22,7 @@ const Article = connection.define('articles', {
 });
 
 Category.hasMany(Article);
-Article.belongsTo(Category);
+Article.belongsTo(Category, { onDelete: 'CASCADE' });
 
 // Article.sync({force: true})
 //     .then(() => { console.log('Tabela Article criada com sucesso!')})

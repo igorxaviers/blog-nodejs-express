@@ -3,18 +3,26 @@
 <div class="col-6 mx-auto my-5">
     <h1 class="mb-5">Editar artigo</h1>
     <form action="/articles/update" method="post">
-
-        <label for="title">Título</label>
+        
         <input 
             type="hidden" 
             name="id"
             value="<%= article.id %>">
+        <label for="title">Título</label>
         <input 
             type="text" 
             name="title" 
             id="title" 
             class="form-control mb-3"
             value="<%= article.title %>">
+
+        <label for="title">Subtítulo</label>
+        <input 
+            type="subtitle" 
+            name="subtitle" 
+            id="subtitle" 
+            class="form-control mb-3"
+            value="<%= article.subtitle %>">
 
         <label for="title">Texto</label>
         <textarea 

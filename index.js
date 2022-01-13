@@ -94,16 +94,14 @@ app.get('/category/:slug', (req, res) => {
     let slug = req.params.slug;
     Category.findOne({
         where: { slug },
-        include: Article.findOne({
-            include: Category
-        })
+        include: Article
     })
     .then(category => {
         if(category != undefined) {
-            Category.findAll({ })
+            Category.findAll()
             .then(categories => {
-                console.log(category.articles);
-                res.render('index', { articles: category.articles, categories });
+                // res.json({ category, categories });
+                res.render('articles-category', { articles: category.articles, categories, category });
             })
             .catch(err => console.log(err));
         }

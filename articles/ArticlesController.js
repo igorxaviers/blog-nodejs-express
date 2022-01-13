@@ -29,13 +29,12 @@ router.get('/admin/articles/new', adminAuth, (req, res) => {
 
 //criar artigo
 router.post('/articles/save', adminAuth, (req, res) => {
-    let title = req.body.title;
-    let body = req.body.body;
-    let categoryId = req.body.categoryId;
-
+    let { title, subtitle, body, categoryId } = req.body;
+    
     if(title != undefined && body != undefined && categoryId != undefined) {
         Article.create({
             title,
+            subtitle,
             body,
             slug: slugify(title),
             categoryId
@@ -87,14 +86,12 @@ router.get('/admin/articles/edit/:id', adminAuth, (req, res) => {
 
 //atualizar artigo
 router.post('/articles/update', adminAuth, (req, res) => {
-    let id = req.body.id;
-    let title = req.body.title;
-    let body = req.body.body;
-    let categoryId = req.body.categoryId;
+    let { id, title, subtitle, body, categoryId } = req.body;
 
     if(id != undefined && title != undefined && body != undefined && categoryId != undefined) {
         Article.update({
             title,
+            subtitle,
             body,
             slug: slugify(title),
             categoryId
